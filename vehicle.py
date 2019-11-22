@@ -10,6 +10,7 @@ class MyVehicle(object):
     '''
     Create a new vehicle on the map
     '''
+    
     def __init__(self, world, spectator):
         '''
         Initialize everything.
@@ -18,6 +19,7 @@ class MyVehicle(object):
         '''
         self.world = world
         self.spectator = spectator
+        self.vehicle = None # only available when drop is called
         self.vehicle_blueprints = self.world.get_blueprint_library().find("vehicle.ford.mustang")
         # pick a random color for the car :)
         if self.vehicle_blueprints.has_attribute('color'):
@@ -28,7 +30,7 @@ class MyVehicle(object):
         '''
         Drop the vehicle at the specified location
         '''
-        transform = carla.Transform(location, carla.Rotation())
+        transform = carla.Transform(location, carla.Rotation(0.0, 180.0, 0.0))
         self.vehicle = self.world.spawn_actor(self.vehicle_blueprints, transform) # place the vehicle
         print('created %s' % self.vehicle.type_id)
 
