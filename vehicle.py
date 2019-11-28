@@ -39,18 +39,4 @@ class MyVehicle(object):
         Get the current vehicle
         '''
         return self.vehicle
-    
-    def attach_sensor(self):
-        '''
-        TODO: attach the sensor to the vehicle
-        '''
-        pass
-        
-        
-        
-        
-        
-        
-        
-        
         
