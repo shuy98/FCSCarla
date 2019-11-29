@@ -27,8 +27,7 @@ def main():
         time.sleep(3)
 
         my_vehicle.apply_control(carla.VehicleControl(throttle=0.4))
-        centerOfM = my_vehicle.get_physics_control().center_of_mass
-        print(centerOfM)
+        
         
         while True:
             vehicle_transform = my_vehicle.get_transform()
@@ -36,14 +35,15 @@ def main():
     #         for w in nearest_waypoint.next(1.0):
     #             print(w.transform)
     #         print()
-    #         if (nearest_waypoint.get_right_lane() != None):
-    #             lateral_pos = nearest_waypoint.get_right_lane().transform.location
-    #         else:
-    #             lateral_pos = nearest_waypoint.transform.location
+#             if (nearest_waypoint.get_left_lane() != None):
+#                 next_waypoint = nearest_waypoint.get_left_lane()
+#             else:
+#             next_waypoint = nearest_waypoint.next(2)[0]
+            next_waypoint = nearest_waypoint
     #         print("ref position %f" % lateral_pos)
     #         print("my position %f" % vehicle_transform.location.y)
     #         print()
-            next_waypoint = nearest_waypoint.next(3)[0]
+            
             lateral_pos = next_waypoint.transform.location
             vehicle_pos = vehicle_transform.location
             
