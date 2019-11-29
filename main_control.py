@@ -24,9 +24,11 @@ def main():
         my_vehicle = my_vehicle_obj.get_vehicle()
         actor_list.append(my_vehicle)
 
-        time.sleep(5)
+        time.sleep(3)
 
         my_vehicle.apply_control(carla.VehicleControl(throttle=0.4))
+        centerOfM = my_vehicle.get_physics_control().center_of_mass
+        print(centerOfM)
         
         while True:
             vehicle_transform = my_vehicle.get_transform()
@@ -54,8 +56,8 @@ def main():
             elif (psi < -math.pi):
                 psi = psi + 2 * math.pi
 
-            wheel_mid_pos_x = vehicle_pos.x + 1.44 * math.cos(vehicle_yaw)
-            wheel_mid_pos_y = vehicle_pos.y + 1.44 * math.sin(vehicle_yaw)
+            wheel_mid_pos_x = vehicle_pos.x + 1.5 * math.cos(vehicle_yaw)
+            wheel_mid_pos_y = vehicle_pos.y + 1.5 * math.sin(vehicle_yaw)
 #             print("longitudinal ego pos", vehicle_pos.x)
 #             print("lateral ego pos", vehicle_pos.y)
 #             print("longitudinal wheel pos", vehicle_pos.x + 1.44 * math.cos(vehicle_yaw))
@@ -81,7 +83,7 @@ def main():
             vehicle_velo = (vehicle_velo_vec.x ** 2 + vehicle_velo_vec.y ** 2) ** 0.5
     #         print(vehicle_velo)
             
-            k = 1
+            k = 0.25
             steer_angle = psi + math.atan2(k * lateral_error, vehicle_velo)
             steer_limit = 70.0 / 180 * math.pi
             if (steer_angle > steer_limit):
